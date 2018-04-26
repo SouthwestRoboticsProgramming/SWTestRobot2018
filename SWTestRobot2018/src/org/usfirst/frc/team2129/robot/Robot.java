@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
 import org.usfirst.frc.team2129.robot.commands.LogCommand;
+import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 
 /**
@@ -25,7 +28,9 @@ import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 public class Robot extends TimedRobot {
 	public static final LogSubsystem kLogSubsystem
 			= new LogSubsystem();
-	public static OI m_oi;
+	public static final DriveTrainSubsystem kDriveSubsystem = new DriveTrainSubsystem();
+	
+	public static final OI OI = new OI();
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -37,8 +42,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		SwLogger.info("entering robotInit");
-		m_oi = new OI();
-		m_chooser.addDefault("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
+		m_chooser.addDefault("Drive Command", new CanDriveCommand());
+		m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SwLogger.info("exiting robotInit");
