@@ -62,9 +62,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		SwLogger.info("entering disabledPeriodic");
+//		SwLogger.info("entering disabledPeriodic");
 		Scheduler.getInstance().run();
-		SwLogger.info("exiting disabledPeriotic");
+//		SwLogger.info("exiting disabledPeriotic");
+		
 	}
 
 	/**

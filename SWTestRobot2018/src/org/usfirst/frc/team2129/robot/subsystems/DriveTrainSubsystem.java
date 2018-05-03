@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2129.robot.subsystems;
 
 import org.usfirst.frc.team2129.robot.Robot;
+import org.usfirst.frc.team2129.robot.SwLogger;
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class DriveTrainSubsystem extends Subsystem {
-
+	final double SPEED_FRACTION = .7;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
@@ -31,8 +32,12 @@ public class DriveTrainSubsystem extends Subsystem {
     }
    
     public void driveWithCanMotors() {
-    	dDrive.arcadeDrive(Robot.OI.getDriveYAxisValue(), Robot.OI.getDriveXAxisValue());
+    	double x = Robot.OI.getDriveXAxisValue();
+    	double y = Robot.OI.getDriveYAxisValue();
+    	dDrive.arcadeDrive(y*SPEED_FRACTION, x*SPEED_FRACTION);
+    	SwLogger.info("New CODE!!!!!!!!!!!!!!");
     	
     }
+    
 }
 
