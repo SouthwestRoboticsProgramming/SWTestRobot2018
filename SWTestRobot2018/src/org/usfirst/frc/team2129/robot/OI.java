@@ -7,8 +7,12 @@
 
 package org.usfirst.frc.team2129.robot;
 
+import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
+import org.usfirst.frc.team2129.robot.commands.DriveForwardCommand;
+import org.usfirst.frc.team2129.robot.commands.FirstDriveCommand;
 import org.usfirst.frc.team2129.robot.commands.LogCommand;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -31,7 +35,7 @@ public class OI {
 	// commands the same as any other Button.
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
+	// Once you have a button, it's trivial to bind it to a command in one of
 	// three ways:
 
 	// Start the command when the button is pressed and let it run the command
@@ -47,7 +51,20 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	private XboxController xbox;
 
+	private FirstDriveCommand m_drive;
+	
 	private static final int PORT = 0;
+	public enum XboxAxisMap {
+		leftX(0),
+		leftY(1);
+		private int num;
+		XboxAxisMap(int a) {
+			num = a;
+		}
+		public int toInt() {
+			return num;
+		}
+	}
 	
 	public enum XboxButtonMap{
 		A(1),
@@ -78,6 +95,30 @@ public class OI {
 		xbox = new XboxController(PORT);
 		
 		Button a = new JoystickButton(xbox, XboxButtonMap.A.toInt());
-		a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
+//		a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
+		a.whenPressed(new DriveForwardCommand());
+		
+	
+	//	m_drive = new FirstDriveCommand(5, 6, new Joystick(PORT), XboxAxisMap.leftX.toInt(), XboxAxisMap.leftY.toInt());
+	}
+	
+	public void drive()
+	{
+		//m_drive.start();
+	}
+	
+	public Joystick getJoystick()
+	{
+		return new Joystick(PORT);
+	}
+	
+	public int getDriveXAxis()
+	{
+		return XboxAxisMap.leftX.toInt();
+	}
+	
+	public int getDriveYAxis()
+	{
+		return XboxAxisMap.leftY.toInt();
 	}
 }
