@@ -16,7 +16,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
 import org.usfirst.frc.team2129.robot.commands.LogCommand;
+<<<<<<< HEAD
 import org.usfirst.frc.team2129.robot.subsystems.DriveSubsystem;
+=======
+import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
+>>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 
 /**
@@ -29,8 +33,14 @@ import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 public class Robot extends TimedRobot {
 	public static final LogSubsystem kLogSubsystem
 			= new LogSubsystem();
+<<<<<<< HEAD
 	public static final DriveSubsystem kDriveSubsystem = new DriveSubsystem();
 	public static final OI m_oi = new OI();
+=======
+	public static final DriveTrainSubsystem kDriveSubsystem = new DriveTrainSubsystem();
+	
+	public static final OI OI = new OI();
+>>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<Command>();
@@ -42,8 +52,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		SwLogger.info("entering robotInit");
+<<<<<<< HEAD
 		//m_chooser.addDefault("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
 		m_chooser.addDefault("Drive", new CanDriveCommand());
+=======
+		m_chooser.addDefault("Drive Command", new CanDriveCommand());
+		m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
+>>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SwLogger.info("exiting robotInit");
@@ -62,9 +77,18 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+<<<<<<< HEAD
 		//SwLogger.info("entering disabledPeriodic");
+=======
+//		SwLogger.info("entering disabledPeriodic");
+>>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 		Scheduler.getInstance().run();
+<<<<<<< HEAD
 		//SwLogger.info("exiting disabledPeriotic");
+=======
+//		SwLogger.info("exiting disabledPeriotic");
+		
+>>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 	}
 
 	/**

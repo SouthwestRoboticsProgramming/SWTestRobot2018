@@ -14,6 +14,7 @@ import org.usfirst.frc.team2129.robot.commands.LogCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -90,6 +91,22 @@ public class OI {
 		}
 	}
 	
+	public enum XboxAxisMap{
+		LeftX(1),
+		LeftY(2);
+		
+		private int num;
+		XboxAxisMap(int buttonNumber)
+		{
+			num = buttonNumber;
+		}
+		
+		public int toInt()
+		{
+			return num;
+		}
+	}
+	
 	public OI()
 	{
 		xbox = new XboxController(PORT);
@@ -120,5 +137,15 @@ public class OI {
 	public int getDriveYAxis()
 	{
 		return XboxAxisMap.leftY.toInt();
+	}
+	
+	public double getDriveXAxisValue()
+	{
+		return xbox.getX(Hand.kLeft);
+	}
+	
+	public double getDriveYAxisValue()
+	{
+		return xbox.getY(Hand.kLeft);
 	}
 }
