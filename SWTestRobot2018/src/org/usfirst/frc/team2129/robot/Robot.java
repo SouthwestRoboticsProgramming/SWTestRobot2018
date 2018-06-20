@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team2129.robot;
 
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,11 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
 import org.usfirst.frc.team2129.robot.commands.LogCommand;
-<<<<<<< HEAD
-import org.usfirst.frc.team2129.robot.subsystems.DriveSubsystem;
-=======
 import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
->>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 
 /**
@@ -33,17 +28,12 @@ import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 public class Robot extends TimedRobot {
 	public static final LogSubsystem kLogSubsystem
 			= new LogSubsystem();
-<<<<<<< HEAD
-	public static final DriveSubsystem kDriveSubsystem = new DriveSubsystem();
-	public static final OI m_oi = new OI();
-=======
 	public static final DriveTrainSubsystem kDriveSubsystem = new DriveTrainSubsystem();
 	
 	public static final OI OI = new OI();
->>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<Command>();
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,13 +42,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		SwLogger.info("entering robotInit");
-<<<<<<< HEAD
-		//m_chooser.addDefault("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
-		m_chooser.addDefault("Drive", new CanDriveCommand());
-=======
 		m_chooser.addDefault("Drive Command", new CanDriveCommand());
 		m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
->>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SwLogger.info("exiting robotInit");
@@ -77,18 +62,10 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-<<<<<<< HEAD
-		//SwLogger.info("entering disabledPeriodic");
-=======
 //		SwLogger.info("entering disabledPeriodic");
->>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 		Scheduler.getInstance().run();
-<<<<<<< HEAD
-		//SwLogger.info("exiting disabledPeriotic");
-=======
 //		SwLogger.info("exiting disabledPeriotic");
 		
->>>>>>> branch 'master' of https://github.com/SouthwestRoboticsProgramming/SWTestRobot2018.git
 	}
 
 	/**
@@ -130,7 +107,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SwLogger.info("exiting autonomousPeriodic");
 	}
-	
+
 	@Override
 	public void teleopInit() {
 		SwLogger.info("entering teleopInit");
@@ -141,7 +118,6 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		m_oi.drive();
 		SwLogger.info("exiting teleopInit");
 	}
 
@@ -162,11 +138,5 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		SwLogger.info("entering testPeriodic");
 		SwLogger.info("exiting testPeriodic");
-	}
-	
-	@Override
-	public void robotPeriodic() {
-		Command cmd = m_chooser.getSelected();
-		cmd.start();
 	}
 }
