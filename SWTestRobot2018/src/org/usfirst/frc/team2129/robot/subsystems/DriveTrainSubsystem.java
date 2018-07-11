@@ -15,14 +15,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class DriveTrainSubsystem extends Subsystem {
-	final double SPEED_FRACTION = .7;
+	final double SPEED_FRACTION = .5;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	WPI_TalonSRX leftMotor = new WPI_TalonSRX(6);
-	WPI_TalonSRX rightMotor = new WPI_TalonSRX(5);
-	SpeedControllerGroup leftSpeedController = new SpeedControllerGroup(leftMotor);
-	SpeedControllerGroup rightSpeedController = new SpeedControllerGroup(rightMotor);
+	WPI_TalonSRX leftRearMotor = new WPI_TalonSRX(0);
+	WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(1);
+	WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(2);
+	WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(3);
+	SpeedControllerGroup leftSpeedController = new SpeedControllerGroup(leftFrontMotor,leftRearMotor);
+	SpeedControllerGroup rightSpeedController = new SpeedControllerGroup(rightFrontMotor,rightRearMotor);
 	
 	DifferentialDrive dDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
 
@@ -35,9 +37,11 @@ public class DriveTrainSubsystem extends Subsystem {
     	double x = Robot.OI.getDriveXAxisValue();
     	double y = Robot.OI.getDriveYAxisValue();
     	dDrive.arcadeDrive(y*SPEED_FRACTION, x*SPEED_FRACTION);
-    	SwLogger.info("New CODE!!!!!!!!!!!!!!");
+    	SwLogger.info("x = " + String.valueOf(x) + ", "+ "y = " + String.valueOf(y));
     	
     }
-    
+    private double f(double x) {
+    	return Math.pow(x, 3);
+    }
 }
 

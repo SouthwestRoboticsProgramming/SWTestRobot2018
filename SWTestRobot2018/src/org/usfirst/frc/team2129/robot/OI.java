@@ -76,8 +76,9 @@ public class OI {
 	}
 	
 	public enum XboxAxisMap{
-		LeftX(1),
-		LeftY(2);
+		//left joystick
+		LeftX(0),
+		LeftY(1);
 		
 		private int num;
 		XboxAxisMap(int buttonNumber)
@@ -101,11 +102,11 @@ public class OI {
 	
 	public double getDriveXAxisValue()
 	{
-		return xbox.getX(Hand.kLeft);
+		return new XboxController(PORT).getX(Hand.kLeft);
 	}
 	
 	public double getDriveYAxisValue()
 	{
-		return xbox.getY(Hand.kLeft);
+		return new XboxController(PORT).getY(Hand.kLeft);
 	}
 }
