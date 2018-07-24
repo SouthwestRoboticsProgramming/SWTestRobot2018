@@ -1,10 +1,9 @@
 package org.usfirst.frc.team2129.robot.subsystems;
 
-import org.usfirst.frc.team2129.robot.Robot;
+import org.usfirst.frc.team2129.robot.OI;
+import org.usfirst.frc.team2129.robot.RobotMap;
 import org.usfirst.frc.team2129.robot.SwLogger;
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
-
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -18,25 +17,39 @@ public class DriveTrainSubsystem extends Subsystem {
 	final double SPEED_FRACTION = .5;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	
-	WPI_TalonSRX leftRearMotor = new WPI_TalonSRX(0);
-	WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(1);
-	WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(2);
-	WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(3);
-	SpeedControllerGroup leftSpeedController = new SpeedControllerGroup(leftFrontMotor,leftRearMotor);
-	SpeedControllerGroup rightSpeedController = new SpeedControllerGroup(rightFrontMotor,rightRearMotor);
-	
-	DifferentialDrive dDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
 
+	private WPI_TalonSRX leftRearMotor;
+	private WPI_TalonSRX rightRearMotor;
+	private WPI_TalonSRX rightFrontMotor;
+	private WPI_TalonSRX leftFrontMotor;
+	private SpeedControllerGroup leftSpeedController;
+	private SpeedControllerGroup rightSpeedController;
+	
+	private DifferentialDrive m_drive;
+	private OI m_OI;
+
+	public DriveTrainSubsystem(OI oi)
+	{
+		m_OI = oi;
+		leftRearMotor = new WPI_TalonSRX(RobotMap.LEFT_REAR_MOTOR);
+		rightRearMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR);
+		rightFrontMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR);
+		leftFrontMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR);
+		leftSpeedController = new SpeedControllerGroup(leftFrontMotor,leftRearMotor);
+		rightSpeedController = new SpeedControllerGroup(rightFrontMotor,rightRearMotor);
+	
+		m_drive = new DifferentialDrive(leftSpeedController, rightSpeedController);
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new CanDriveCommand());
+        setDefaultCommand(new CanDriveCommand(this));
     }
    
     public void driveWithCanMotors() {
-    	double x = Robot.OI.getDriveXAxisValue();
-    	double y = Robot.OI.getDriveYAxisValue();
-    	dDrive.arcadeDrive(y*SPEED_FRACTION, x*SPEED_FRACTION);
+    	double x = f(m_OI.getDriveXAxisValue());
+    	double y = f(m_OI.getDriveYAxisValue());
+    	m_drive.arcadeDrive(y*SPEED_FRACTION, x*SPEED_FRACTION);
     	SwLogger.info("x = " + String.valueOf(x) + ", "+ "y = " + String.valueOf(y));
     	
     }

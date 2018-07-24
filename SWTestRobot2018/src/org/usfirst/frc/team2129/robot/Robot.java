@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
-import org.usfirst.frc.team2129.robot.commands.LogCommand;
 import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 
@@ -28,22 +27,25 @@ import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 public class Robot extends TimedRobot {
 	public static final LogSubsystem kLogSubsystem
 			= new LogSubsystem();
-	public static final DriveTrainSubsystem kDriveSubsystem = new DriveTrainSubsystem();
+	private OI m_OI;
+	private DriveTrainSubsystem m_DriveSubsystem;
 	
-	public static final OI OI = new OI();
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+		m_OI = new OI();
+		m_DriveSubsystem = new DriveTrainSubsystem(m_OI);
+		
 		SwLogger.info("entering robotInit");
-		m_chooser.addDefault("Drive Command", new CanDriveCommand());
-		m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
+		m_chooser.addDefault("Drive Command", new CanDriveCommand(m_DriveSubsystem));
+		//m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SwLogger.info("exiting robotInit");
@@ -56,14 +58,16 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		/*
 		SwLogger.info("entering disabledInit");
 		SwLogger.info("exiting disabledInit");
+		*/
 	}
 
 	@Override
 	public void disabledPeriodic() {
 //		SwLogger.info("entering disabledPeriodic");
-		Scheduler.getInstance().run();
+//		Scheduler.getInstance().run();
 //		SwLogger.info("exiting disabledPeriotic");
 		
 	}
@@ -103,9 +107,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		SwLogger.info("entering autonomousPeriodic");
-		Scheduler.getInstance().run();
-		SwLogger.info("exiting autonomousPeriodic");
+	//	SwLogger.info("entering autonomousPeriodic");
+	//	Scheduler.getInstance().run();
+	//	SwLogger.info("exiting autonomousPeriodic");
 	}
 
 	@Override
@@ -136,7 +140,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		SwLogger.info("entering testPeriodic");
-		SwLogger.info("exiting testPeriodic");
+		//SwLogger.info("entering testPeriodic");
+		//SwLogger.info("exiting testPeriodic");
 	}
 }

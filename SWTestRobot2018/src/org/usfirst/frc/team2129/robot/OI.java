@@ -7,13 +7,8 @@
 
 package org.usfirst.frc.team2129.robot;
 
-import org.usfirst.frc.team2129.robot.commands.LogCommand;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -51,6 +46,7 @@ public class OI {
 
 	private static final int PORT = 0;
 	
+	/*
 	public enum XboxButtonMap{
 		A(1),
 		B(2),
@@ -91,22 +87,23 @@ public class OI {
 			return num;
 		}
 	}
+	*/
 	
 	public OI()
 	{
 		xbox = new XboxController(PORT);
 		
-		Button a = new JoystickButton(xbox, XboxButtonMap.A.toInt());
-		a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
+		//Button a = new JoystickButton(xbox, XboxButtonMap.A.toInt());
+		//a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
 	}
 	
 	public double getDriveXAxisValue()
 	{
-		return new XboxController(PORT).getX(Hand.kLeft);
+		return xbox.getX(Hand.kLeft);
 	}
 	
 	public double getDriveYAxisValue()
 	{
-		return new XboxController(PORT).getY(Hand.kLeft);
+		return xbox.getY(Hand.kLeft);
 	}
 }

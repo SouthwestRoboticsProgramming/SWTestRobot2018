@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2129.robot.commands;
 
-import org.usfirst.frc.team2129.robot.Robot;
+import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,10 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CanDriveCommand extends Command {
 
-    public CanDriveCommand() {
+	DriveTrainSubsystem m_subsystem;
+	
+    public CanDriveCommand(DriveTrainSubsystem subsystem) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.kDriveSubsystem);
+    	m_subsystem = subsystem;
+    	requires(m_subsystem);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +24,7 @@ public class CanDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.kDriveSubsystem.driveWithCanMotors();
-    	
+    	m_subsystem.driveWithCanMotors();
     }
 
     // Make this return true when this Command no longer needs to run execute()
