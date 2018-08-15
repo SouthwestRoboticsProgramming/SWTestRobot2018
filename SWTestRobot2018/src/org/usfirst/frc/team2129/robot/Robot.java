@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2129.robot.commands.CanDriveCommand;
+import org.usfirst.frc.team2129.robot.commands.RaiseLifter;
 import org.usfirst.frc.team2129.robot.subsystems.DriveTrainSubsystem;
+import org.usfirst.frc.team2129.robot.subsystems.LifterSubsystem;
 import org.usfirst.frc.team2129.robot.subsystems.LogSubsystem;
 
 /**
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
 			= new LogSubsystem();
 	private OI m_OI;
 	private DriveTrainSubsystem m_DriveSubsystem;
+	private LifterSubsystem m_lifterSubsystem;
 	
 
 	Command m_autonomousCommand;
@@ -42,13 +45,16 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_OI = new OI();
 		m_DriveSubsystem = new DriveTrainSubsystem(m_OI);
+		m_lifterSubsystem = new LifterSubsystem(m_OI);
+
 		
 		SwLogger.info("entering robotInit");
 		m_chooser.addDefault("Drive Command", new CanDriveCommand(m_DriveSubsystem));
-		//m_chooser.addObject("Log Command", new LogCommand(999, LogCommand.LogWhat.Pressed, "doh"));
+		m_chooser.addObject("Lifter Command", new RaiseLifter(m_lifterSubsystem, m_OI));
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SwLogger.info("exiting robotInit");
+	
 	}
 
 	/**

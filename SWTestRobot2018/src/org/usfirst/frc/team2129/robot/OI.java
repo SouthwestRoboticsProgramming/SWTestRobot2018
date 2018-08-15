@@ -46,31 +46,9 @@ public class OI {
 
 	private static final int PORT = 0;
 	
-	/*
-	public enum XboxButtonMap{
-		A(1),
-		B(2),
-		X(3),
-		Y(4),
-		LeftTrigger(5),
-		RightTrigger(6),
-		Windows(7),
-		Select(8),
-		LeftJoystick(9),
-		RightJoystick(10);
-		
-		private int num;
-		XboxButtonMap(int buttonNumber)
-		{
-			num = buttonNumber;
-		}
-		
-		public int toInt()
-		{
-			return num;
-		}
-	}
 	
+
+	/*
 	public enum XboxAxisMap{
 		//left joystick
 		LeftX(0),
@@ -104,6 +82,12 @@ public class OI {
 	
 	public double getDriveYAxisValue()
 	{
-		return xbox.getY(Hand.kLeft);
+		return -1 * xbox.getY(Hand.kLeft);
+	}
+	public boolean isRaisingLifter() {
+		return xbox.getPOV() == 0;
+	}
+	public boolean isLoweringLifter() {
+		return xbox.getPOV() == 180;
 	}
 }
