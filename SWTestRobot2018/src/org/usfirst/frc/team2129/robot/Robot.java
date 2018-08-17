@@ -46,7 +46,8 @@ public class Robot extends TimedRobot {
 		m_OI = new OI();
 		m_DriveSubsystem = new DriveTrainSubsystem(m_OI);
 		m_lifterSubsystem = new LifterSubsystem(m_OI);
-
+		
+		m_OI.initialize(m_lifterSubsystem);
 		
 		SwLogger.info("entering robotInit");
 		m_chooser.addDefault("Drive Command", new CanDriveCommand(m_DriveSubsystem));

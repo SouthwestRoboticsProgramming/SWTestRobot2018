@@ -50,7 +50,7 @@ public class DriveTrainSubsystem extends Subsystem {
     	double x = f(m_OI.getDriveXAxisValue());
     	double y = f(m_OI.getDriveYAxisValue());
     	m_drive.arcadeDrive(y*SPEED_FRACTION, x*SPEED_FRACTION);
-    	SwLogger.info("x = " + String.valueOf(x) + ", "+ "y = " + String.valueOf(y));
+    	//SwLogger.info("x = " + String.valueOf(x) + ", "+ "y = " + String.valueOf(y));
     	
     }
     private double f(double x) {

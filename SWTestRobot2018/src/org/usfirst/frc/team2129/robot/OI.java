@@ -8,6 +8,12 @@
 package org.usfirst.frc.team2129.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import org.usfirst.frc.team2129.robot.commands.GrabberCommand;
+import org.usfirst.frc.team2129.robot.subsystems.LifterSubsystem;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
@@ -46,8 +52,29 @@ public class OI {
 
 	private static final int PORT = 0;
 	
-	
-
+	public enum XboxButtonMap{
+		A(1),
+		B(2),
+		X(3),
+		Y(4),
+		LeftTrigger(5),
+		RightTrigger(6),
+		Windows(7),
+		Select(8),
+		LeftJoystick(9),
+		RightJoystick(10);
+		
+		private int num;
+		XboxButtonMap(int buttonNumber)
+		{
+			num = buttonNumber;
+		}
+		
+		public int toInt()
+		{
+			return num;
+		}
+	}
 	/*
 	public enum XboxAxisMap{
 		//left joystick
@@ -70,9 +97,17 @@ public class OI {
 	public OI()
 	{
 		xbox = new XboxController(PORT);
-		
 		//Button a = new JoystickButton(xbox, XboxButtonMap.A.toInt());
 		//a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
+		
+		
+		//a.whenPressed(new LogCommand(PORT, LogCommand.LogWhat.Pressed, "A"));
+		
+	}
+	
+	public void initialize(LifterSubsystem sub) {
+		Button a = new JoystickButton(xbox, XboxButtonMap.A.toInt());
+		a.toggleWhenPressed(new GrabberCommand(sub, this));
 	}
 	
 	public double getDriveXAxisValue()
@@ -89,5 +124,8 @@ public class OI {
 	}
 	public boolean isLoweringLifter() {
 		return xbox.getPOV() == 180;
+	}
+	public Button getGrabberButton() {
+		return new JoystickButton(xbox, XboxButtonMap.A.toInt());
 	}
 }

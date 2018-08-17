@@ -24,10 +24,14 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	public static int LEFT_REAR_MOTOR = 0;
-	public static int RIGHT_REAR_MOTOR = 1;
-	public static int RIGHT_FRONT_MOTOR = 2;
-	public static int LEFT_FRONT_MOTOR = 3;
-	public static int LIFTER_MOTOR = 4;
+	//CAN
+	public static final int LEFT_REAR_MOTOR = 0;
+	public static final int RIGHT_REAR_MOTOR = 1;
+	public static final int RIGHT_FRONT_MOTOR = 2;
+	public static final int LEFT_FRONT_MOTOR = 3;
+	public static final int LIFTER_MOTOR = 4;
+	
+	public static final int GRABBER_SOLENOID_CAN = 5;
+	public static final int GRABBER_SOLENOID_PCM = 7;
 
 }

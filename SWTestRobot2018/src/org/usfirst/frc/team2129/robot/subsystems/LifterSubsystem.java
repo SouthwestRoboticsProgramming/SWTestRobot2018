@@ -8,6 +8,7 @@ import org.usfirst.frc.team2129.robot.commands.RaiseLifter;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,11 +22,15 @@ public class LifterSubsystem extends Subsystem {
     // here. Call these from Commands.
 
 	private WPI_TalonSRX lifter_motor;
-
+	private Solenoid grabberPiston = new Solenoid(RobotMap.GRABBER_SOLENOID_CAN, RobotMap.GRABBER_SOLENOID_PCM);
 	
 	private DifferentialDrive m_drive;
 	private OI m_OI;
-
+	
+	public  void grab(boolean isEngaged) {
+		grabberPiston.set(isEngaged);
+	}
+	
 	public LifterSubsystem(OI oi)
 	{
 		m_OI = oi;
