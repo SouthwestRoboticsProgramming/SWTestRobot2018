@@ -33,5 +33,8 @@ public class RobotMap {
 	
 	public static final int GRABBER_SOLENOID_CAN = 5;
 	public static final int GRABBER_SOLENOID_PCM = 7;
+	
+	public static final int LIFTER_UPPER_SWITCH = 3;
+	public static final int LIFTER_LOWER_SWITCH = 2;
 
 }
